@@ -5,8 +5,15 @@
 
 bool Builtins::handle(const std::vector<std::string> &tokens)
 {
-    if (tokens[0] == "exit")
+    static std::string y= "";
+    int size = tokens.size();
+    for(int i=0; i<size; i++){
+        y += tokens[i] + " ";
+    }
+    y += '\n';
+    if (tokens[0] == "exit"){
         exit(EXIT_SUCCESS);
+    }
     else if (tokens[0] == "cd")
     {
         size_t argc = tokens.size();
@@ -30,7 +37,9 @@ bool Builtins::handle(const std::vector<std::string> &tokens)
                 std::cerr << "cd: " << msg << ": " << path << std::endl;
             }
         }
-
+        return true;
+    } else if (tokens[0] == "history"){
+        std::cout << y;
         return true;
     }
 
